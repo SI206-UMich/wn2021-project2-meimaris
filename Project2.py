@@ -124,14 +124,13 @@ def write_csv(data, filename):
 
 
 def extra_credit(filepath):
-    """
-    EXTRA CREDIT
+     with open(filepath, 'r') as html_file:
+        soup = BeautifulSoup(html_file, 'lxml')
+        tags = soup.find("span", id="freeText4791443123668479528")
+        list = re.findall(r'(?:[A-Z][a-z]{2,100000}\s*){2,100000}', tags.text)
+        return list
 
-    Please see the instructions document for more information on how to complete this function.
-    You do not have to write test cases for this function.
-     """
-    pass
-    
+
 class TestCases(unittest.TestCase):
     # call get_search_links() and save it to a static variable: search_urls
     search_urls = get_search_links()
@@ -227,7 +226,8 @@ class TestCases(unittest.TestCase):
         self.assertEqual(lines[1], ['Harry Potter and the Deathly Hallows (Harry Potter, #7)', 'J.K. Rowling'])
         # check that the last row is 'Harry Potter: The Prequel (Harry Potter, #0.5)', 'J.K. Rowling'
         self.assertEqual(lines[-1], ['Harry Potter: The Prequel (Harry Potter, #0.5)', 'J.K. Rowling'])
+
 if __name__ == '__main__':
     
-   #print(extra_credit("extra_credit.htm"))
+   print(extra_credit("extra_credit.htm"))
    unittest.main(verbosity=2)
